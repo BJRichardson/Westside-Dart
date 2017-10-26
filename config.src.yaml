@@ -1,0 +1,7 @@
+database:
+ username: westside
+ password: westside
+ host: localhost
+ port: 5433
+ databaseName: westside_app
+
