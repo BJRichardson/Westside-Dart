@@ -1,3 +1,1 @@
 database: $DATABASE_URL
-logging:
-  type: console
