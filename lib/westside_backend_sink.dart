@@ -85,6 +85,11 @@ class WestsideBackendSink extends RequestSink {
         .generate(() => new ScheduleController());
 
     router
+        .route("/ministries/[:id]")
+        .pipe(new Authorizer.bearer(authServer))
+        .generate(() => new MinistryController());
+
+    router
         .route("/announcements/[:id]")
         .pipe(new Authorizer.basic(authServer))
         .generate(() => new AnnouncementController());

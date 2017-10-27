@@ -1,11 +1,11 @@
 import '../westside_backend.dart';
 
-class ScheduleController extends HTTPController {
+class MinistryController extends HTTPController {
   @httpGet
-  Future<Response> getSchedule() async {
+  Future<Response> getMinistries() async {
     var forUserId = request.authorization.resourceOwnerIdentifier;
 
-    var query = new Query<UserEvent>()
+    var query = new Query<UserGroup>()
       ..where.user = whereRelatedByValue(forUserId);
 
     var result = await query.fetch();
@@ -14,23 +14,23 @@ class ScheduleController extends HTTPController {
   }
 
   @httpPost
-  Future<Response> addEventToSchedule(@HTTPPath("id") int id) async {
+  Future<Response> addGroupToMinistries(@HTTPPath("id") int id) async {
     var forUserId = request.authorization.resourceOwnerIdentifier;
 
-    var eventQuery = new Query<Event>()
+    var groupQuery = new Query<Group>()
       ..where.id = whereEqualTo(id);
 
-    var event = await eventQuery.fetchOne();
+    var group = await groupQuery.fetchOne();
 
-    if (event == null) {
+    if (group == null) {
       return new Response.notFound();
     }
 
-    var userEventQuery = new Query<UserEvent>()
+    var userGroupQuery = new Query<UserGroup>()
       ..values.user = (new User()..id = forUserId)
-      ..values.event = event;
+      ..values.group = group;
 
-    var result = await userEventQuery.insert();
+    var result = await userGroupQuery.insert();
 
     return new Response.ok(result);
   }
@@ -39,7 +39,7 @@ class ScheduleController extends HTTPController {
   Future<Response> deleteEventFromSchedule(@HTTPPath("id") int id) async {
     var forUserId = request.authorization.resourceOwnerIdentifier;
 
-    var userEventQuery = new Query<UserEvent>()
+    var userEventQuery = new Query<UserGroup>()
       ..where.id = whereEqualTo(id)
       ..where.user = whereRelatedByValue(forUserId);
 

@@ -37,7 +37,7 @@ Future main() async {
       await speaker2Query.fetchOne();
 
       var query1 = new Query<Group>()
-        ..values.name = "New Group 1"
+        ..values.name = "Z Group"
         ..values.description = "New description"
         ..values.chairperson = "Chairperson"
         ..values.email = "group@westside.com"
@@ -46,7 +46,7 @@ Future main() async {
       await query1.insert();
 
       var query2 = new Query<Group>()
-        ..values.name = "New Group 2"
+        ..values.name = "A Group"
         ..values.description = "New description 2"
         ..values.chairperson = "Chairperson"
         ..values.email = "group@westside.com"
@@ -79,24 +79,24 @@ Future main() async {
       var result = await req.get();
 
       expect(result, hasResponse(200, [
-        {
-          "id": 1,
-          "name": "New Group 1",
-          "description": "New description",
-          "chairperson": "Chairperson",
-          "email": "group@westside.com",
-          "phone": "404-231-8888",
-          "imageUrl": null
-        },
-        {
+          {
           "id": 2,
-          "name": "New Group 2",
+          "name": "A Group",
           "description": "New description 2",
           "chairperson": "Chairperson",
           "email": "group@westside.com",
           "phone": "404-231-8888",
           "imageUrl": null
-        }
+          },
+          {
+            "id": 1,
+            "name": "Z Group",
+            "description": "New description",
+            "chairperson": "Chairperson",
+            "email": "group@westside.com",
+            "phone": "404-231-8888",
+            "imageUrl": null
+          }
       ]));
     });
 
@@ -107,7 +107,7 @@ Future main() async {
       expect(result, hasResponse(200,
           {
             "id": 1,
-            "name": "New Group 1",
+            "name": "Z Group",
             "description": "New description",
             "chairperson": "Chairperson",
             "email": "group@westside.com",

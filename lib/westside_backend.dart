@@ -26,4 +26,5 @@ export 'controller/announcement_group_controller.dart';
 export 'controller/prayer_controller.dart';
 export 'controller/admin_prayer_controller.dart';
 export 'controller/user_controller.dart';
+export 'controller/ministry_controller.dart';
 

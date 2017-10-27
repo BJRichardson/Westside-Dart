@@ -4,7 +4,7 @@ class GroupController extends HTTPController {
   @httpGet
   Future<Response> getGroups() async {
     var query = new Query<Group>()
-      ..sortBy((e) => e.id, QuerySortOrder.ascending);
+      ..sortBy((e) => e.name, QuerySortOrder.ascending);
 
     var events = await query.fetch();
     if (events == null) {
