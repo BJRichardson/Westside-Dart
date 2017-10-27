@@ -15,7 +15,7 @@ Future main() async {
         ..json = {
           "username": "bob@westside.com",
           "password": "foobaraxegrind12%",
-          "name": "Bobby",
+          "firstName": "Bobby",
           "roles": "admin,moderator"
         }).post();
 
@@ -25,15 +25,15 @@ Future main() async {
         ..json = {
           "username": "ted@westside.com",
           "password": "foobaraxegrind12%",
-          "name": "Teddy"
+          "firstName": "Teddy",
         }).post();
 
       tokens.add(JSON.decode(user2.body)["access_token"]);
 
-      var speaker1Query = new Query<User>()..where.name = "Bobby";
+      var speaker1Query = new Query<User>()..where.firstName = "Bobby";
       await speaker1Query.fetchOne();
 
-      var speaker2Query = new Query<User>()..where.name = "Teddy";
+      var speaker2Query = new Query<User>()..where.firstName = "Teddy";
       await speaker2Query.fetchOne();
 
       var query1 = new Query<Group>()

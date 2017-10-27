@@ -55,6 +55,11 @@ class WestsideBackendSink extends RequestSink {
         .generate(() => new IdentityController());
 
     router
+        .route("/users/[:id]")
+        .pipe(new Authorizer.bearer(authServer))
+        .generate(() => new UserController(authServer));
+
+    router
         .route("/events/[:id]")
         .pipe(new Authorizer.basic(authServer))
         .generate(() => new EventController());

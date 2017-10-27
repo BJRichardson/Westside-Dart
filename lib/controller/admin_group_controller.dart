@@ -25,7 +25,7 @@ class AdminGroupController extends HTTPController {
     if (userIds != null) {
       var userQuery1 = new Query<User>()
         ..where.id = whereIn(userIds)
-        ..returningProperties((s) => [s.id, s.name]);
+        ..returningProperties((s) => [s.id, s.firstName]);
 
       var users = await userQuery1.fetch();
 

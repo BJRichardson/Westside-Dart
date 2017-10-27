@@ -4,7 +4,7 @@ class EventController extends HTTPController {
   @httpGet
   Future<Response> getEvents() async {
     var query = new Query<Event>()
-      ..sortBy((e) => e.id, QuerySortOrder.ascending);
+      ..sortBy((e) => e.startTime, QuerySortOrder.descending);
 
     query.joinMany((e) => e.groupEvents)
         .joinOne((s) => s.group)

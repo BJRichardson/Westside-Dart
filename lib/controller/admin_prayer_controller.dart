@@ -22,7 +22,7 @@ class AdminPrayerController extends HTTPController {
     if (posterId != null) {
       var userQuery2 = new Query<User>()
         ..where.id = user.id
-        ..returningProperties((s) => [s.id, s.name]);
+        ..returningProperties((s) => [s.id, s.firstName]);
 
       var user2 = await userQuery2.fetchOne();
 

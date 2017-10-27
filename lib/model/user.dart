@@ -18,7 +18,10 @@ class _User extends ManagedAuthenticatable {
   String email;
 
   @ManagedColumnAttributes(nullable: true)
-  String name;
+  String firstName;
+
+  @ManagedColumnAttributes(nullable: true)
+  String lastName;
 
   @ManagedColumnAttributes(nullable: true)
   String phone;

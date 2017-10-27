@@ -15,7 +15,7 @@ Future main() async {
         ..json = {
           "username": "bob@westside.com",
           "password": "foobaraxegrind12%",
-          "name": "Bobby",
+          "firstName": "Bobby",
           "biography": "Chess Master",
           "roles": "admin,moderator"
         }).post();
@@ -26,16 +26,16 @@ Future main() async {
         ..json = {
           "username": "ted@westside.com",
           "password": "foobaraxegrind12%",
-          "name": "Teddy",
+          "firstName": "Teddy",
           "biography": "Rough Rider"
         }).post();
 
       tokens.add(JSON.decode(user2.body)["access_token"]);
 
-      var speaker1Query = new Query<User>()..where.name = "Bobby";
+      var speaker1Query = new Query<User>()..where.firstName = "Bobby";
       await speaker1Query.fetchOne();
 
-      var speaker2Query = new Query<User>()..where.name = "Teddy";
+      var speaker2Query = new Query<User>()..where.firstName = "Teddy";
       await speaker2Query.fetchOne();
 
       var query1 = new Query<Event>()
@@ -107,27 +107,27 @@ Future main() async {
       var result = await req.get();
 
       expect(result, hasResponse(200, [
-        {
-          "id": 1,
-          "title": "New Event 1",
-          "startTime": "1970-01-01T00:02:00.000Z",
-          "description": "New description",
-          "endTime": "1970-01-01T00:02:02.000Z",
-          "moreInformation": "Nothing",
-          "imageUrl": "Nothing",
-          "groups": [{"id":1,"name":"New Group"}]
+          {
+            "id": 2,
+            "title": "New Event 2",
+            "startTime": "1970-01-01T00:03:30.000Z",
+            "description": "New description 2",
+            "endTime": "1970-01-01T00:03:32.000Z",
+            "moreInformation": "Nothing 2",
+            "imageUrl": "Nothing",
+            "groups": [{"id":2,"name":"New Group 2"}]
+          },
+          {
+            "id": 1,
+            "title": "New Event 1",
+            "startTime": "1970-01-01T00:02:00.000Z",
+            "description": "New description",
+            "endTime": "1970-01-01T00:02:02.000Z",
+            "moreInformation": "Nothing",
+            "imageUrl": "Nothing",
+            "groups": [{"id":1,"name":"New Group"}]
 
-        },
-        {
-          "id": 2,
-          "title": "New Event 2",
-          "startTime": "1970-01-01T00:03:30.000Z",
-          "description": "New description 2",
-          "endTime": "1970-01-01T00:03:32.000Z",
-          "moreInformation": "Nothing 2",
-          "imageUrl": "Nothing",
-          "groups": [{"id":2,"name":"New Group 2"}]
-        }
+          }
       ]));
     });
 

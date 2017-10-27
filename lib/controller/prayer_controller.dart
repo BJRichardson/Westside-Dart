@@ -8,7 +8,7 @@ class PrayerController extends HTTPController {
 
     query.joinMany((e) => e.userPrayers)
         .joinOne((s) => s.user)
-        .returningProperties((s) => [s.id, s.name]);
+        .returningProperties((s) => [s.id, s.firstName]);
 
     var prayers = await query.fetch();
     prayers.forEach((prayer) {
@@ -25,7 +25,7 @@ class PrayerController extends HTTPController {
 
     query.joinMany((e) => e.userPrayers)
         .joinOne((s) => s.user)
-        .returningProperties((s) => [s.id, s.name]);
+        .returningProperties((s) => [s.id, s.firstName]);
 
     var prayer = await query.fetchOne();
     if (prayer == null) {
