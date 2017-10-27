@@ -13,7 +13,7 @@ Future main() async {
       for (var i = 0; i < 6; i++) {
         var response = await (app.client.clientAuthenticatedRequest("/register")
           ..json = {
-            "username": "bob+@westside.com",
+            "username": "bob@westside.com",
             "password": "foobaraxegrind12%",
             "lastName": "Washington"
           })
@@ -42,7 +42,7 @@ Future main() async {
           .get());
 
       expect(response,
-          hasResponse(200, partial({"username": "bob+0@westside.com"})));
+          hasResponse(200, partial({"username": "bob@westside.com"})));
     });
 
     test("Can get users with valid credentials", () async {
@@ -63,14 +63,14 @@ Future main() async {
             },
             {
               "id": 1,
-              "email": "bob+@westside.com",
+              "email": "bob@westside.com",
               "firstName": null,
               "lastName": "Washington",
               "phone": null,
               "address": null,
               "imageUrl": null,
               "roles": null,
-              "username": "bob+@westside.com"
+              "username": "bob@westside.com"
             }
           ]));
     });

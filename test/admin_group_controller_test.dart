@@ -152,7 +152,7 @@ Future main() async {
             "email": "group@westside.com",
             "imageUrl": "Nothing",
             "phone": "404-231-8888",
-            "users": [{"id": 1, "name": "Bobby"}]
+            "users": [{"id": 1, "firstName": "Bobby"}]
           }
       ));
 

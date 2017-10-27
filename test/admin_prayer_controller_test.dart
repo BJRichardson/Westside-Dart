@@ -137,7 +137,7 @@ Future main() async {
             "prayer": "updated prayer",
             "createdDate": "1970-01-01T00:02:00.000Z",
             "updatedDate": null,
-            "poster": {"id": 1, "name": "Bobby"}
+            "poster": {"id": 1, "firstName": "Bobby"}
           }
       ));
 
