@@ -111,7 +111,7 @@ Future main() async {
           "updatedDate": null,
           "groupId": 2,
           "imageUrl": "Nothing",
-          "poster": "{id: 2, name: Teddy}"
+          "poster": "{id: 2, name: Teddy, lastName: null}"
         },
         {
           "id": 1,
@@ -120,7 +120,7 @@ Future main() async {
           "updatedDate": null,
           "groupId": 1,
           "imageUrl": "Nothing",
-          "poster": "{id: 1, name: Bobby}"
+          "poster": "{id: 1, firstName: Bobby, lastName: null}"
         }
       ]));
     });
@@ -137,7 +137,7 @@ Future main() async {
             "updatedDate": null,
             "groupId": 1,
             "imageUrl": "Nothing",
-            "poster": "{id: 1, name: Bobby}"
+            "poster": "{id: 1, firstName: Bobby, lastName: null}"
           }
       ));
     });
@@ -154,7 +154,7 @@ Future main() async {
             "updatedDate": null,
             "groupId": 2,
             "imageUrl": "Nothing",
-            "poster": '{id: 2, name: Teddy}'
+            "poster": '{id: 2, name: Teddy, lastName: null}'
           }
       ));
     });

@@ -15,6 +15,8 @@ class AdminAnnouncementController extends HTTPController {
     var announcement = new Announcement()
       ..readMap(request.body.asMap());
 
+    announcement.posterId = user.id;
+
     var announcentQuery = new Query<Announcement>()
       ..values = announcement;
 
@@ -51,6 +53,8 @@ class AdminAnnouncementController extends HTTPController {
 
     var announcement = new Announcement()
       ..readMap(request.body.asMap());
+
+    announcement.updatedDate = new DateTime.now();
 
     var query = new Query<Announcement>()
       ..where.id = whereEqualTo(id)

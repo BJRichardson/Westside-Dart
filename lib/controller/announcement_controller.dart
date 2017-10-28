@@ -8,7 +8,7 @@ class AnnouncementController extends HTTPController {
 
     query.joinMany((e) => e.userAnnouncements)
         .joinOne((s) => s.user)
-        .returningProperties((s) => [s.id, s.firstName]);
+        .returningProperties((s) => [s.id, s.firstName, s.lastName]);
 
     var announcements = await query.fetch();
     announcements.forEach((announcement) {

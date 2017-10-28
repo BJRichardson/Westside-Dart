@@ -39,16 +39,28 @@ Future main() async {
 
       var event2 = await query2.insert();
 
+      var query5 = new Query<Event>()
+        ..values.title = "Future Event 3"
+        ..values.startTime = new DateTime.fromMillisecondsSinceEpoch(2500000009999)
+        ..values.description = "New description 3"
+        ..values.endTime = new DateTime.fromMillisecondsSinceEpoch(2540000009999)
+        ..values.moreInformation = "Nothing 3"
+        ..values.imageUrl = "Nothing";
+      var event3 = await query5.insert();
+
       var userEvent = new Query<UserEvent>()
         ..values.user = user
         ..values.event = event1;
-
       await userEvent.insert();
 
       userEvent = new Query<UserEvent>()
         ..values.user = user
         ..values.event = event2;
+      await userEvent.insert();
 
+      userEvent = new Query<UserEvent>()
+        ..values.user = user
+        ..values.event = event3;
       await userEvent.insert();
     });
 
@@ -61,8 +73,7 @@ Future main() async {
       var result = await req.get();
 
       expect(result, hasResponse(200, [
-        {"id": 1, "isAttending": null, "user": {"id": 1}, "event": {"id": 1}},
-        {"id": 2, "isAttending": null, "user": {"id": 1}, "event": {"id": 2}}
+        {"id": 3, "isAttending": null, "user": {"id": 1}, "event": {"id": 3, "title": "Future Event 3"}}
       ]));
     });
 

@@ -12,6 +12,8 @@ class AdminPrayerController extends HTTPController {
     var prayer = new Prayer()
       ..readMap(request.body.asMap());
 
+    prayer.posterId = user.id;
+
     var prayerQuery = new Query<Prayer>()
       ..values = prayer;
 
@@ -22,7 +24,7 @@ class AdminPrayerController extends HTTPController {
     if (posterId != null) {
       var userQuery2 = new Query<User>()
         ..where.id = user.id
-        ..returningProperties((s) => [s.id, s.firstName]);
+        ..returningProperties((s) => [s.id, s.firstName, s.lastName]);
 
       var user2 = await userQuery2.fetchOne();
 
@@ -49,6 +51,8 @@ class AdminPrayerController extends HTTPController {
     var prayer = new Prayer()
       ..readMap(request.body.asMap());
 
+    prayer.updatedDate = new DateTime.now();
+
     var query = new Query<Prayer>()
       ..where.id = whereEqualTo(id)
       ..values = prayer;
@@ -64,8 +68,7 @@ class AdminPrayerController extends HTTPController {
 
   @httpDelete
   Future<Response> deletePrayer(@HTTPPath("id") int id) async {
-    if (!(await hasAuthorization(
-        request.authorization.resourceOwnerIdentifier, id))) {
+    if (!(await hasAuthorization(request.authorization.resourceOwnerIdentifier, id))) {
       return new Response.unauthorized();
     };
 
@@ -82,10 +85,10 @@ class AdminPrayerController extends HTTPController {
   }
 
   Future<bool> hasAuthorization(int userId, int prayerId) async {
-    var announcementQuery = new Query<Prayer>()
+    var prayerQuery = new Query<Prayer>()
       ..where.id = prayerId;
 
-    var prayer = await announcementQuery.fetchOne();
+    var prayer = await prayerQuery.fetchOne();
     if (prayer == null) {
       return false;
     }

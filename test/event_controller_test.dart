@@ -56,6 +56,15 @@ Future main() async {
         ..values.imageUrl = "Nothing";
       var event2 = await query2.insert();
 
+      var query5 = new Query<Event>()
+        ..values.title = "Future Event 3"
+        ..values.startTime = new DateTime.fromMillisecondsSinceEpoch(2500000009999)
+        ..values.description = "New description 3"
+        ..values.endTime = new DateTime.fromMillisecondsSinceEpoch(2540000009999)
+        ..values.moreInformation = "Nothing 3"
+        ..values.imageUrl = "Nothing";
+      var event3 = await query5.insert();
+
       var query3 = new Query<Group>()
           ..values.name = "New Group"
           ..values.description = "description"
@@ -81,6 +90,11 @@ Future main() async {
         ..values.event = event2
         ..values.group = group2;
       await groupEventQuery2.insert();
+
+      var groupEventQuery3 = new Query<GroupEvent>()
+        ..values.event = event3
+        ..values.group = group2;
+      await groupEventQuery3.insert();
     });
 
     tearDown(() async {
@@ -108,25 +122,14 @@ Future main() async {
 
       expect(result, hasResponse(200, [
           {
-            "id": 2,
-            "title": "New Event 2",
-            "startTime": "1970-01-01T00:03:30.000Z",
-            "description": "New description 2",
-            "endTime": "1970-01-01T00:03:32.000Z",
-            "moreInformation": "Nothing 2",
+            "id": 3,
+            "title": "Future Event 3",
+            "startTime": "2049-03-22T04:26:49.999Z",
+            "description": "New description 3",
+            "endTime": "2050-06-28T03:33:29.999Z",
+            "moreInformation": "Nothing 3",
             "imageUrl": "Nothing",
             "groups": [{"id":2,"name":"New Group 2"}]
-          },
-          {
-            "id": 1,
-            "title": "New Event 1",
-            "startTime": "1970-01-01T00:02:00.000Z",
-            "description": "New description",
-            "endTime": "1970-01-01T00:02:02.000Z",
-            "moreInformation": "Nothing",
-            "imageUrl": "Nothing",
-            "groups": [{"id":1,"name":"New Group"}]
-
           }
       ]));
     });

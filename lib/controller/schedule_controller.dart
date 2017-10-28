@@ -6,11 +6,15 @@ class ScheduleController extends HTTPController {
     var forUserId = request.authorization.resourceOwnerIdentifier;
 
     var query = new Query<UserEvent>()
-      ..where.user = whereRelatedByValue(forUserId);
+      ..where.user = whereRelatedByValue(forUserId)
+      ..where.event.startTime = whereGreaterThan(new DateTime.now());
 
-    var result = await query.fetch();
+    query.joinOne((s) => s.event)
+        .returningProperties((s) => [s.id, s.title]);
 
-    return new Response.ok(result);
+    var results = await query.fetch();
+
+    return new Response.ok(results);
   }
 
   @httpPost

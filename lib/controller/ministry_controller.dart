@@ -8,6 +8,9 @@ class MinistryController extends HTTPController {
     var query = new Query<UserGroup>()
       ..where.user = whereRelatedByValue(forUserId);
 
+    query.joinOne((s) => s.group)
+        .returningProperties((s) => [s.id, s.name]);
+
     var result = await query.fetch();
 
     return new Response.ok(result);

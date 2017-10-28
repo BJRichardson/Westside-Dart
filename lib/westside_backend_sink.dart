@@ -97,7 +97,7 @@ class WestsideBackendSink extends RequestSink {
     router
         .route("/announcements/group/[:id]")
         .pipe(new Authorizer.basic(authServer))
-        .generate(() => new AnnouncementController());
+        .generate(() => new AnnouncementGroupController());
 
     router
         .route("/admin/announcements/[:id]")

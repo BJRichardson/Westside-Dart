@@ -55,8 +55,8 @@ Future main() async {
       var result = await req.get();
 
       expect(result, hasResponse(200, [
-        {"id": 1, "user": {"id": 1}, "group": {"id": 1}},
-        {"id": 2, "user": {"id": 1}, "group": {"id": 2}}
+        {"id": 1, "user": {"id": 1}, "group": {"id": 1, "name": "New Group 1"}},
+        {"id": 2, "user": {"id": 1}, "group": {"id": 2, "name": "New Group 2"}}
       ]));
     });
 

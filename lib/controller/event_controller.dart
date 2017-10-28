@@ -4,16 +4,17 @@ class EventController extends HTTPController {
   @httpGet
   Future<Response> getEvents() async {
     var query = new Query<Event>()
-      ..sortBy((e) => e.startTime, QuerySortOrder.descending);
+      ..where.startTime = whereGreaterThan(new DateTime.now())
+      ..sortBy((e) => e.startTime, QuerySortOrder.ascending);
 
     query.joinMany((e) => e.groupEvents)
         .joinOne((s) => s.group)
         .returningProperties((s) => [s.id, s.name]);
 
     var events = await query.fetch();
+
     events.forEach((event) {
-      event.groups =
-          event.groupEvents.map((s) => s.group.asMap()).toList();
+      event.groups = event.groupEvents.map((s) => s.group.asMap()).toList();
     });
 
     return new Response.ok(events);
