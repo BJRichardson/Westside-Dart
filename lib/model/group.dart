@@ -7,6 +7,12 @@ class Group extends ManagedObject<_Group> implements _Group {
 
   @managedTransientOutputAttribute
   List<Map> users;
+
+  Map<String, dynamic> asMap() {
+    var map = super.asMap();
+    map.remove("userGroups");
+    return map;
+  }
 }
 
 class _Group {

@@ -19,11 +19,17 @@ class GroupController extends HTTPController {
     var query = new Query<Group>()
       ..where.id = whereEqualTo(id);
 
-    var event = await query.fetchOne();
-    if (event == null) {
+    query.joinMany((e) => e.userGroups)
+        .joinOne((s) => s.user)
+        .returningProperties((s) => [s.id, s.firstName, s.lastName]);
+
+    var group = await query.fetchOne();
+    if (group == null) {
       return new Response.notFound();
     }
 
-    return new Response.ok(event);
+    group.users = group.userGroups.map((s) => s.user.asMap()).toList();
+
+    return new Response.ok(group);
   }
 }

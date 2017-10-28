@@ -35,6 +35,7 @@ class EventController extends HTTPController {
     }
 
     event.groups = event.groupEvents.map((s) => s.group.asMap())?.toList();
+
     return new Response.ok(event);
   }
 }

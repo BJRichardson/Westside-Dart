@@ -31,10 +31,10 @@ Future main() async {
       tokens.add(JSON.decode(user2.body)["access_token"]);
 
       var speaker1Query = new Query<User>()..where.firstName = "Bobby";
-      await speaker1Query.fetchOne();
+      var user3 = await speaker1Query.fetchOne();
 
       var speaker2Query = new Query<User>()..where.firstName = "Teddy";
-      await speaker2Query.fetchOne();
+      var user4 = await speaker2Query.fetchOne();
 
       var query1 = new Query<Group>()
         ..values.name = "Z Group"
@@ -43,7 +43,7 @@ Future main() async {
         ..values.email = "group@westside.com"
         ..values.phone = "404-231-8888";
 
-      await query1.insert();
+      var group1 = await query1.insert();
 
       var query2 = new Query<Group>()
         ..values.name = "A Group"
@@ -52,7 +52,19 @@ Future main() async {
         ..values.email = "group@westside.com"
         ..values.phone = "404-231-8888";
 
-      await query2.insert();
+      var group2 = await query2.insert();
+
+      var userGroupQuery = new Query<UserGroup>()
+        ..values.user = user3
+        ..values.group = group1;
+
+      await userGroupQuery.insert();
+
+      var userGroupQuery2 = new Query<UserGroup>()
+        ..values.user = user4
+        ..values.group = group2;
+
+      await userGroupQuery2.insert();
     });
 
     tearDown(() async {
@@ -112,7 +124,8 @@ Future main() async {
             "chairperson": "Chairperson",
             "email": "group@westside.com",
             "phone": "404-231-8888",
-            "imageUrl": null
+            "imageUrl": null,
+            "users": [{"id": 1, "firstName": "Bobby", "lastName": null}]
           }
       ));
     });
