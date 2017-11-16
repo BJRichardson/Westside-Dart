@@ -32,6 +32,20 @@ Future main() async {
 
       tokens.add(JSON.decode(user2.body)["access_token"]);
 
+      var req = app.client.clientAuthenticatedRequest("/register")
+        ..json = {
+          "username": "drew@westside.com",
+          "password": "foobaraxegrind12%",
+          "firstName": "Drew",
+          "lastName": "Reed"
+        };
+
+      app.client.defaultAccessToken = (await req.post()).asMap["access_token"];
+
+      var userQuery = new Query<User>()
+        ..values.username = "drew@westside.com";
+      var user = await userQuery.fetchOne();
+
       var speaker1Query = new Query<User>()..where.firstName = "Bobby";
       await speaker1Query.fetchOne();
 
@@ -95,6 +109,11 @@ Future main() async {
         ..values.event = event3
         ..values.group = group2;
       await groupEventQuery3.insert();
+
+      var userEvent = new Query<UserEvent>()
+        ..values.user = user
+        ..values.event = event1;
+      await userEvent.insert();
     });
 
     tearDown(() async {
@@ -129,7 +148,8 @@ Future main() async {
             "endTime": "2050-06-28T03:33:29.999Z",
             "moreInformation": "Nothing 3",
             "imageUrl": "Nothing",
-            "groups": [{"id":2,"name":"New Group 2"}]
+            "groups": [{"id":2,"name":"New Group 2"}],
+            "users": []
           }
       ]));
     });
@@ -147,7 +167,8 @@ Future main() async {
             "endTime": "1970-01-01T00:02:02.000Z",
             "moreInformation": "Nothing",
             "imageUrl": "Nothing",
-            "groups": [{"id":1,"name":"New Group"}]
+            "groups": [{"id":1,"name":"New Group"}],
+            "users": [{"id": 1, "firstName": "Drew", "lastName": "Reed"}]
           }
       ));
     });

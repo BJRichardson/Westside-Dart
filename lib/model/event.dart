@@ -8,9 +8,13 @@ class Event extends ManagedObject<_Event> implements _Event {
     @managedTransientOutputAttribute
     List<Map> groups;
 
+    @managedTransientOutputAttribute
+    List<Map> users;
+
     Map<String, dynamic> asMap() {
       var map = super.asMap();
       map.remove("groupEvents");
+      map.remove("userEvents");
       return map;
     }
 }

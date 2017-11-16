@@ -96,7 +96,7 @@ Future main() async {
       result = await req.get();
 
       expect(result, hasResponse(200, [
-        {"id": 2, "isAttending": null, "user": {"id": 1}, "event": {"id": 2}}
+        {"id": 2, "isAttending": null, "user": {"id": 1}, "event": {"id": 2, "title": "Future Event 3"}}
       ]));
     });
 
