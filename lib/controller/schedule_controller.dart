@@ -40,11 +40,11 @@ class ScheduleController extends HTTPController {
   }
 
   @httpDelete
-  Future<Response> deleteEventFromSchedule(@HTTPPath("id") int id) async {
+  Future<Response> deleteEventFromSchedule(@HTTPPath("id") int eventId) async {
     var forUserId = request.authorization.resourceOwnerIdentifier;
 
     var userEventQuery = new Query<UserEvent>()
-      ..where.id = whereEqualTo(id)
+      ..where.event = whereRelatedByValue(eventId)
       ..where.user = whereRelatedByValue(forUserId);
 
     var result = await userEventQuery.delete();
