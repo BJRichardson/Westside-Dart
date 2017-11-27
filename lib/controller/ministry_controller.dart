@@ -39,14 +39,14 @@ class MinistryController extends HTTPController {
   }
 
   @httpDelete
-  Future<Response> deleteEventFromSchedule(@HTTPPath("id") int id) async {
+  Future<Response> deleteGroupFromMinistries(@HTTPPath("id") int groupId) async {
     var forUserId = request.authorization.resourceOwnerIdentifier;
 
-    var userEventQuery = new Query<UserGroup>()
-      ..where.id = whereEqualTo(id)
+    var userGroupQuery = new Query<UserGroup>()
+      ..where.group = whereEqualTo(groupId)
       ..where.user = whereRelatedByValue(forUserId);
 
-    var result = await userEventQuery.delete();
+    var result = await userGroupQuery.delete();
 
     if (result == 0) {
       return new Response.notFound();

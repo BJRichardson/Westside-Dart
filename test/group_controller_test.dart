@@ -92,13 +92,14 @@ Future main() async {
 
       expect(result, hasResponse(200, [
           {
-          "id": 2,
-          "name": "A Group",
-          "description": "New description 2",
-          "chairperson": "Chairperson",
-          "email": "group@westside.com",
-          "phone": "404-231-8888",
-          "imageUrl": null
+            "id": 2,
+            "name": "A Group",
+            "description": "New description 2",
+            "chairperson": "Chairperson",
+            "email": "group@westside.com",
+            "phone": "404-231-8888",
+            "imageUrl": null,
+            "users": [{"id": 2, "firstName": "Teddy", "lastName": null}]
           },
           {
             "id": 1,
@@ -107,7 +108,8 @@ Future main() async {
             "chairperson": "Chairperson",
             "email": "group@westside.com",
             "phone": "404-231-8888",
-            "imageUrl": null
+            "imageUrl": null,
+            "users": [{"id": 1, "firstName": "Bobby", "lastName": null}]
           }
       ]));
     });
