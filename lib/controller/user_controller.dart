@@ -44,6 +44,7 @@ class UserController extends QueryController<User> {
       return new Response.unauthorized();
     }
 
+    //TODO Reimplement this
 //    if (query.values.asMap().keys.contains("roles") && !isAdmin) {
 //      return new Response.unauthorized();
 //    }
