@@ -89,14 +89,14 @@ Future main() async {
           "prayer": "New Prayer 2",
           "createdDate": "1970-01-01T00:03:30.000Z",
           "updatedDate": null,
-          "poster": "{id: 2, name: Teddy}"
+          "poster": "{'id': 2, 'firstName': 'Teddy', 'lastName': null}"
         },
         {
           "id": 1,
           "prayer": "New Prayer 1",
           "createdDate": "1970-01-01T00:02:00.000Z",
           "updatedDate": null,
-          "poster": "{id: 1, name: Bobby}"
+          "poster": "{'id': 1, 'firstName': 'Bobby', 'lastName': null}"
         }
       ]));
     });
@@ -111,7 +111,7 @@ Future main() async {
             "prayer": "New Prayer 1",
             "createdDate": "1970-01-01T00:02:00.000Z",
             "updatedDate": null,
-            "poster": "{id: 1, name: Bobby}"
+            "poster": "{'id': 1, 'firstName': 'Bobby', 'lastName': null}"
           }
       ));
     });

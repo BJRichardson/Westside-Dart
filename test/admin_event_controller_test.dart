@@ -40,21 +40,31 @@ Future main() async {
         ..values.title = "New Event 1"
         ..values.startTime = new DateTime.fromMillisecondsSinceEpoch(120000)
         ..values.description = "New description"
+        ..values.creatorId = 1
         ..values.endTime = new DateTime.fromMillisecondsSinceEpoch(122000)
-        ..values.imageUrl = "Nothing"
-        ..values.moreInformation = "Nothing";
-
+        ..values.moreInformation = "Nothing"
+        ..values.imageUrl = "Nothing";
       var event1 = await query1.insert();
 
       var query2 = new Query<Event>()
         ..values.title = "New Event 2"
         ..values.startTime = new DateTime.fromMillisecondsSinceEpoch(210000)
         ..values.description = "New description 2"
+        ..values.creatorId = 2
         ..values.endTime = new DateTime.fromMillisecondsSinceEpoch(212000)
-        ..values.imageUrl = "Nothing"
-        ..values.moreInformation = "Nothing 2";
-
+        ..values.moreInformation = "Nothing 2"
+        ..values.imageUrl = "Nothing";
       var event2 = await query2.insert();
+
+      var query5 = new Query<Event>()
+        ..values.title = "Future Event 3"
+        ..values.startTime = new DateTime.fromMillisecondsSinceEpoch(2500000009999)
+        ..values.description = "New description 3"
+        ..values.creatorId = 1
+        ..values.endTime = new DateTime.fromMillisecondsSinceEpoch(2540000009999)
+        ..values.moreInformation = "Nothing 3"
+        ..values.imageUrl = "Nothing";
+      var event3 = await query5.insert();
 
       var query3 = new Query<Group>()
         ..values.name = "New Group"
@@ -83,10 +93,35 @@ Future main() async {
         ..values.group = group2;
 
       await groupEventQuery2.insert();
+
+      var groupEventQuery3 = new Query<GroupEvent>()
+        ..values.event = event3
+        ..values.group = group2;
+      await groupEventQuery3.insert();
     });
 
     tearDown(() async {
       await app.stop();
+    });
+
+    test("GET /events returns data", () async {
+      var req =app.client.authenticatedRequest("admin/events", accessToken: tokens[0]);
+      var result = await req.get();
+
+      expect(result, hasResponse(200, [
+        {
+          "id": 3,
+          "creatorId": 1,
+          "title": "Future Event 3",
+          "startTime": "2049-03-22T04:26:49.999Z",
+          "description": "New description 3",
+          "endTime": "2050-06-28T03:33:29.999Z",
+          "moreInformation": "Nothing 3",
+          "imageUrl": "Nothing",
+          "groups": [{"id":2,"name":"New Group 2"}],
+          "users": []
+        }
+      ]));
     });
 
     test("PUT /events by Id returns data", () async {
@@ -99,6 +134,7 @@ Future main() async {
       expect(result, hasResponse(200,
           {
             "id": 1,
+            "creatorId": 1,
             "title": "New Event 1",
             "startTime": "1970-01-01T00:02:00.000Z",
             "description": "updated description",
@@ -152,6 +188,7 @@ Future main() async {
           "title": "New Event 3",
           "startTime": "1970-01-01T00:04:00.000Z",
           "description": "New description 3",
+          "creatorId": 1,
           "endTime": "1970-01-01T00:06:02.000Z",
           "moreInformation": "Nothing 3",
           "imageUrl": "Nothing",
@@ -161,7 +198,8 @@ Future main() async {
 
       expect(result, hasResponse(200,
           {
-            "id": 3,
+            "id": 4,
+            "creatorId": 1,
             "title": "New Event 3",
             "startTime": "1970-01-01T00:04:00.000Z",
             "description": "New description 3",

@@ -81,10 +81,10 @@ Future main() async {
           {
             "id": 1,
             "announcement": "updated announcement",
-            "groupId": 1,
             "createdDate": "1970-01-01T00:02:00.000Z",
+            "updatedDate": "2017-12-21T20:19:31.633989Z",
             "imageUrl": "Nothing",
-            "updatedDate": "1970-01-01T00:02:02.000Z"
+            "groupId": 1
           }
       ));
     });

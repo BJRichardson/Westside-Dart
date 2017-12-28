@@ -19,8 +19,8 @@ class _Announcement {
   @managedPrimaryKey
   int id;
 
-  DateTime createdDate;
   String announcement;
+  DateTime createdDate;
 
   @ManagedColumnAttributes(nullable: true)
   DateTime updatedDate;

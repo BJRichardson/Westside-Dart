@@ -56,6 +56,7 @@ Future main() async {
         ..values.title = "New Event 1"
         ..values.startTime = new DateTime.fromMillisecondsSinceEpoch(120000)
         ..values.description = "New description"
+        ..values.creatorId = 1
         ..values.endTime = new DateTime.fromMillisecondsSinceEpoch(122000)
         ..values.moreInformation = "Nothing"
         ..values.imageUrl = "Nothing";
@@ -65,6 +66,7 @@ Future main() async {
         ..values.title = "New Event 2"
         ..values.startTime = new DateTime.fromMillisecondsSinceEpoch(210000)
         ..values.description = "New description 2"
+        ..values.creatorId = 2
         ..values.endTime = new DateTime.fromMillisecondsSinceEpoch(212000)
         ..values.moreInformation = "Nothing 2"
         ..values.imageUrl = "Nothing";
@@ -74,6 +76,7 @@ Future main() async {
         ..values.title = "Future Event 3"
         ..values.startTime = new DateTime.fromMillisecondsSinceEpoch(2500000009999)
         ..values.description = "New description 3"
+        ..values.creatorId = 3
         ..values.endTime = new DateTime.fromMillisecondsSinceEpoch(2540000009999)
         ..values.moreInformation = "Nothing 3"
         ..values.imageUrl = "Nothing";
@@ -142,6 +145,7 @@ Future main() async {
       expect(result, hasResponse(200, [
           {
             "id": 3,
+            "creatorId": 3,
             "title": "Future Event 3",
             "startTime": "2049-03-22T04:26:49.999Z",
             "description": "New description 3",
@@ -161,6 +165,7 @@ Future main() async {
       expect(result, hasResponse(200,
           {
             "id": 1,
+            "creatorId": 1,
             "title": "New Event 1",
             "startTime": "1970-01-01T00:02:00.000Z",
             "description": "New description",

@@ -22,6 +22,7 @@ class Event extends ManagedObject<_Event> implements _Event {
 class _Event {
   @managedPrimaryKey
   int id;
+  int creatorId;
 
   String title;
   DateTime startTime;
