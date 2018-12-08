@@ -32,5 +32,4 @@ class _Announcement {
   int groupId;
 
   ManagedSet<UserAnnouncement> userAnnouncements;
-
 }
